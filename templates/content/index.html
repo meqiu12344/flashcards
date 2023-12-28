@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} Strona główna {% endblock %}
+{% block links %} <link rel="stylesheet" href="{% static 'css/index.css' %}"> {% endblock %}
+
+{% block content %}
+    <div class="row">
+            <div class="text">
+                <div class="title">
+                    Zacznij od Podstaw:
+                </div>
+                <div class="content">
+                    Rozpocznij swoją przygodę z językiem angielskim od podstaw. Nasza platforma oferuje setki fiszek, które pomogą Ci opanować podstawowe słownictwo, gramatykę i zwroty. Niezależnie od tego, czy jesteś początkującym, czy chcesz odświeżyć swoje umiejętności, mamy materiały dostosowane do Twoich potrzeb.
+                </div>
+            </div>
+            <div class="image">
+                <img src="{% static 'foto/index_foto3.jpg' %}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text">
+                <div class="title">
+                    Twórz i Dziel się Fiszkami:
+                </div>
+                <div class="content">
+                    Nie tylko ucz się, ale także twórz własne fiszki! Dodawaj słówka, zwroty czy zdania, które sprawiają Ci trudność. Dzięki naszym narzędziom możesz personalizować fiszki zgodnie z Twoimi potrzebami. Co więcej, możesz je udostępniać innym, abyście razem mogli rozwijać swoje umiejętności językowe.
+                </div>
+            </div>
+            <div class="image">
+                <img src="{% static 'foto/index_foto2.jpg' %}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text">
+                <div class="title">
+                    Nauka w Dowolnym Miejscu i Czasie:
+                </div>
+                <div class="content">
+                    Nasza platforma jest dostępna online, co oznacza, że możesz uczyć się w dowolnym miejscu i czasie. Czy to w drodze do szkoły, w przerwie obiadowej czy wieczorem przed snem, masz dostęp do swoich fiszek. Nauka staje się bardziej elastyczna i dostosowana do Twojego stylu życia.
+                </div>
+            </div>
+            <div class="image">
+                <img src="{% static 'foto/index_foto1.jpg' %}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text">
+                <div class="title">
+                    Narzędzia dla Nauczycieli:
+                </div>
+                <div class="content">
+                    Jesteś nauczycielem? Nasza platforma oferuje narzędzia do tworzenia fiszek dla Twoich uczniów. Monitoruj ich postępy, dostosowuj materiały do programu nauczania i wspieraj ich rozwój językowy.
+                </div>
+            </div>
+            <div class="image">
+                <img src="{% static 'foto/index_foto4.jpg' %}">
+            </div>
+        </div>
+
+        <br>
+        <br><br><br>
+
+        <h1>Dlaczego warto wybrać naszą platformę</h1>
+        <br><hr><br>
+        <div class="grid-container">
+            <div class="grid-item">
+                <i class="bi bi-1-circle"></i>
+                <br>
+                Elastyczność Nauki
+            </div>
+            <div class="grid-item">
+                <i class="bi bi-2-circle"></i>
+                <br>
+                Personalizowane Fiszki
+            </div>
+            <div class="grid-item">
+                <i class="bi bi-3-circle"></i>
+                <br>
+                Promowanie Uczenia się
+            </div>
+            <div class="grid-item">
+                <i class="bi bi-4-circle"></i>
+                <br>
+                Łatwość Używania
+            </div>
+        </div>
+        <br>
+        <br>
+        <a href="{% url 'flashcardApp:search' %}" class="start-learn">Zacznij naukę teraz!</a>
+
+{% endblock %}

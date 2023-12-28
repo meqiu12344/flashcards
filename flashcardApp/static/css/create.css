@@ -1,0 +1,110 @@
+.app span{
+    width: 80%;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom: 50px;
+}
+
+tbody{
+    transition: 0.5s;
+}
+
+tr{
+    width: 100%;
+    margin: 0;
+    background-color: white;
+    transition: 0.5s;
+}
+
+thead{
+    border-bottom: 1px solid black;
+}
+
+td{
+    height: 10vh;
+}
+
+
+input[type='text']{
+    width: 90%;
+    height: 50%;
+    margin: 0 auto;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+input[type='text']:focus{
+    outline: none;
+}
+
+tr:nth-child(odd){
+    background-color: #e5e5e5;
+}
+
+.add-word{
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #FCA311;
+    cursor: pointer;
+    margin: 20px 0;
+    border: #FCA311 1px solid;
+    padding: 30px 0;
+    transition: 0.5s;
+}
+
+.add-word:hover{
+    background-color: transparent;
+    letter-spacing: 3px;
+}
+
+i.bi-trash{
+    font-size: 25px;
+    color: red;
+}
+
+.app h2{
+    text-align: left;
+}
+
+input[type='text'].lesson-name{
+    padding: 15px 3px;
+    border: 1px solid black;
+    font-size: 20px;
+    width: 99%;
+}
+
+.upload{
+    width: 100%;
+    padding: 30px 0;
+    margin-bottom: 50px;
+    background-color: #14213d;
+    border: none;
+    border: 1px solid #14213d;
+    color: #e5e5e5;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.upload:hover{
+    background-color: transparent;
+    color: #14213d;
+    letter-spacing: 3px;
+}
+
+@media screen and (max-width: 700px) {
+    table{
+        width: 100%;
+    }
+}

@@ -1,0 +1,80 @@
+.card {
+    width: 60%;
+    height: 30vh;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+input[type="text"] {
+    width: 50%;
+    padding: 10px 0 10px 5px;
+    border: 1px solid #fca311;
+    border-radius: 3px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #fca311;
+    background-color: #fca311;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: transparent;
+}
+
+.card {
+    /* Pozostałe style (jak w oryginalnym kodzie) */
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    transform-origin: center;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.answer.correct{
+    border: 2px solid green;
+}
+
+@media screen and (max-width: 1200px) {
+    .card{
+        width: 95%;
+        height: 50vh;
+    }
+}

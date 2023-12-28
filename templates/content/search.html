@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} Szukaj {% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <script src="{% static "js/searchBox.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="searchBox">
+        <h1 class="search-h1">Wyszukaj fraze:</h1>
+        <form action="">
+            <input type="text" class="search-input" id="search-box">
+            <button type="submit" class="search-button"><i class="bi bi-search"></i></button>
+        </form>
+    </div>
+
+    <br><br><hr><br>
+
+    <div class="search-result">
+        {% for group in allGroups %}
+            <a href="{{ group.get_absolute_url }}" class="element">
+                <h2 class="title">{{ group.title }}</h2>
+                <div class="element-info">
+                    <div>
+                        <i class="quantity">Ilość fiszek: <b>{{ group.cardQuantity }}</b></i>,
+                        <span class="date">{{ group.date }}</span>
+                    </div>
+                    <span class="user">
+                        <i class="bi bi-person-circle"></i>
+                        <b><i>{{ group.author }}</i></b>
+                    </span>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} Flashcards {% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flashcard.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="card" id="flashcard">
+        <div class="card-inner">
+            <div class="front">
+                <p><i>J. Polski</i></p>
+                <h3 id="word"></h3>
+                <hr><br>
+                <input type="text" id="userAnswer">
+                <br><br>
+                <button onclick="flipCard()" id="checkAnswer">Pokaż odpowiedź</button>
+            </div>
+            <div class="back">
+                <p><i>J. Angielski</i></p>
+                <h3 id="answer"></h3>
+                <hr><br>
+                <input type="text" class="answer correct" id="inputAnswer">
+                <br><br>
+                <button onclick="flipCard(); cos()">Pokaż J. Angielski</button>
+                <br><br>
+                <button id="dalejButton" onclick="flipCard()">Dalej</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        let word = document.getElementById('word');
+        let answer = document.getElementById('answer');
+        let run = true;
+        let index = 0;
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/getFlashcards/' + encodeURIComponent('{{ group.title }}'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let index = 0;
+                    let userAnswer = document.getElementById('userAnswer');
+                    let inputAnswer = document.getElementById('inputAnswer');
+
+                    const delay = (delayInms) => {
+                        return new Promise(resolve => setTimeout(resolve, delayInms));
+                    };
+
+                    async function nextFlashcard() {
+                        await delay(500);
+                        if (run) {
+                            const element = data.flashcardsJson[index];
+
+                            word.innerText = element.word;
+                            answer.innerText = element.answer;
+
+                            run = false;
+
+                            $('#checkAnswer').on('click', function (){
+                                inputAnswer.value = userAnswer.value;
+
+                                if(inputAnswer.value.toLowerCase() === element.answer.toLowerCase()){
+                                    inputAnswer.style.border = "green 1px solid";
+                                }else{
+                                    inputAnswer.style.border = "red 1px solid";
+                                }
+                            })
+
+                            index++;
+                        }
+                    }
+
+                    $('#dalejButton').on('click', function () {
+                        if (!data.flashcardsJson[index + 1]) {
+                            document.getElementById('dalejButton').innerText = "Zakończ";
+                            $('#dalejButton').on('click', function () {
+                                window.location.replace("/search/");
+                            });
+                        }
+
+                        userAnswer.value = '';
+                        inputAnswer.value = '';
+
+                        run = true;
+                        nextFlashcard();
+                    });
+
+                    nextFlashcard();
+                },
+            });
+        });
+    </script>
+
+    <script src="{% static 'js/cardFlip.js' %}"></script>
+{% endblock %}
+

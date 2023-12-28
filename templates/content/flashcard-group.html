@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} {{ title }} {% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flashcard-group.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="group-info">
+        <h1>{{ group.title }}</h1>
+        <div class="date-user">
+            <p>Data: <i><b>{{ group.date }}</b></i>, </p>
+            <p>Autor: <b>{{ group.author }}</b></p>
+        </div>
+        <br>
+        <a href="{% url 'flashcardApp:flashcards' group.title %}">Rozpocznij naukę!</a>
+    </div>
+     <br><br><br><hr><br><br>
+     <div class="words-group">
+         <h3>Lista słówek: </h3>
+         <table id="table">
+             <tbody id="tbody">
+             <tr>
+                 <td><span title="język polski" style="background-image: url('https://static.fiszkoteka.pl/imgmrg/P/g/o/HISi51swR0_MKo-Bv.png');background-position:-0px -0px;width:32px;height:22px;vertical-align: middle;overflow:hidden;display:inline-block;"></span> <br><br>  Polski</td>
+                 <td><b>-</b></td>
+                 <td><span title="English" style="background-image: url('https://static.fiszkoteka.pl/imgmrg/P/g/o/HISi51swR0_MKo-Bv.png');background-position:-32px -0px;width:32px;height:22px;vertical-align: middle;overflow:hidden;display:inline-block;"></span> <br><br>  Angielski</td>
+             </tr>
+
+                 {% for flaschcard in flashcards %}
+                     <tr>
+                        <td>{{ flaschcard.word }}</td>
+                        <td><b>-</b></td>
+                        <td>{{ flaschcard.answer }}</td>
+                    </tr>
+                 {% endfor %}
+             </tbody>
+         </table>
+     </div>
+{% endblock %}

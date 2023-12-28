@@ -1,0 +1,113 @@
+::selection {
+    background-color: #14213D;
+    color: #FCA311;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+header img{
+    max-width: 250px;
+    height: auto;
+}
+
+header ul{
+    width: 50%;
+
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li {
+    list-style: none;
+}
+
+li a, li button{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FCA311;
+    transition: 0.2s;
+}
+
+li button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+li a:hover, li button:hover{
+    color: #14213D;
+    border-bottom: 3px solid #FCA311;
+}
+
+main.app{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.grid-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.grid-item i{
+    font-size: 40px;
+}
+
+
+footer{
+    width: 100%;
+    height: 50vh;
+    background-color: #e5e5e5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+hr{
+    width: 15%;
+    margin: 0 auto;
+    border: 1px solid #FCA311;
+}
+
+
+@media screen and (max-width: 1400px) {
+    main.app, header ul{
+        width: 95%;
+    }
+}

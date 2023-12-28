@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} Stwórz własny zbiór fiszek {% endblock %}
+{% block links %} <link rel="stylesheet" href="{% static 'css/create.css' %}"> {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <form action="" method="post">
+            <h1>Stwórz</h1>
+            <br>
+            <span>Rozpocznij swoją przygodę z nauką języka angielskiego, tworząc własny zbiór fiszek! Personalizuj swoje materiały, dziel się nimi z innymi uczniami lub nauczycielami. Z nami nauka stanie się nie tylko efektywna, ale także fascynująca!</span>
+
+            <br><br><hr><br>
+            <h2>Nazwa lekcji:</h2>
+            <input type="text" name="lesson-name" class="lesson-name" id="">
+
+            <br><br>
+            <h2>Słówka:</h2>
+            {% csrf_token %}
+            <table id="table">
+                <tbody id="tbody">
+                <tr>
+                    <td><span title="język polski" style="background-image: url('https://static.fiszkoteka.pl/imgmrg/P/g/o/HISi51swR0_MKo-Bv.png');background-position:-0px -0px;width:32px;height:22px;vertical-align: middle;overflow:hidden;display:inline-block;"></span> <br><br>  Polski</td>
+                    <td><b>-</b></td>
+                    <td><span title="English" style="background-image: url('https://static.fiszkoteka.pl/imgmrg/P/g/o/HISi51swR0_MKo-Bv.png');background-position:-32px -0px;width:32px;height:22px;vertical-align: middle;overflow:hidden;display:inline-block;"></span> <br><br>  Angielski</td>
+                    <td><i class="bi bi-x-lg"></i> <br><br> Usuń</td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" name="polish[]" id=""></td>
+                    <td><b>-</b></td>
+                    <td><input type="text" name="english[]" id=""></td>
+                    <td><i class="bi bi-trash" onclick="deleteWord(this)"></i></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" name="polish[]" id=""></td>
+                    <td><b>-</b></td>
+                    <td><input type="text" name="english[]" id=""></td>
+                    <td><i class="bi bi-trash" onclick="deleteWord(this)"></i></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" name="polish[]" id=""></td>
+                    <td><b>-</b></td>
+                    <td><input type="text" name="english[]" id=""></td>
+                    <td><i class="bi bi-trash" onclick="deleteWord(this)"></i></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="add-word" type="button" onclick="addWord()">Dodaj Słowo</button>
+            <hr><br>
+            <input type="submit" class="upload"  value="Udostępnij">
+            <script src="{% static 'js/addWord.js' %}"></script>
+        </form>
+
+    {% else %}
+        <script>
+            window.location.href = '/signIn/';
+        </script>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} Rejestracja {% endblock %}
+{% block links %} <link rel="stylesheet" href="{% static 'css/login.css' %}"> {% endblock %}
+
+{% block content %}
+
+    <div class="app">
+        <div class="logo">
+            <img src="{% static 'foto/logo.png' %}" alt="logo">
+        </div>
+        <form action="" class="form" method="post">
+            <h1>Stwórz konto</h1>
+            {% if error %}
+                <p style="color: red"><b>Formularz został wypełniony nieprawidłowo</b></p>
+            {% endif %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <input type="submit" class="btn submit" value="Załóż konto">
+            <br>
+            <a href="">Zaloguj się</a>
+        </form>
+    </div>
+{% endblock %}

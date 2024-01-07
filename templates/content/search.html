@@ -9,10 +9,19 @@
 
 {% block content %}
     <div class="searchBox">
-        <h1 class="search-h1">Wyszukaj fraze:</h1>
-        <form action="">
-            <input type="text" class="search-input" id="search-box">
-            <button type="submit" class="search-button"><i class="bi bi-search"></i></button>
+        <h1 class="search-h1">Szukaj:</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" class="search-input" placeholder="Wyszkuja grupę fiszke po tytule." id="search-box">
+            {% if user.is_authenticated %}
+                {% if groups_views %}
+                    <input type="hidden" name="my-groups" value="False">
+                    <input type="submit" value="Pokaż wszystkie fiszki">
+                {% else %}
+                    <input type="hidden" name="my-groups" value="True">
+                    <input type="submit" value="Pokaż moje fiszki">
+                {% endif %}
+            {% endif %}
         </form>
     </div>
 
@@ -21,16 +30,18 @@
     <div class="search-result">
         {% for group in allGroups %}
             <a href="{{ group.get_absolute_url }}" class="element">
-                <h2 class="title">{{ group.title }}</h2>
-                <div class="element-info">
-                    <div>
-                        <i class="quantity">Ilość fiszek: <b>{{ group.cardQuantity }}</b></i>,
-                        <span class="date">{{ group.date }}</span>
+                <div class="text-info">
+                    <h2 class="title">{{ group.title }}</h2>
+                    <div class="element-info">
+                        <div>
+                            <i class="quantity">Ilość fiszek: <b>{{ group.cardQuantity }}</b></i>,<br>
+                            <span class="date">{{ group.date }}</span>
+                        </div>
+                        <span class="user">
+                            <i class="bi bi-person-circle"></i>
+                            <b><i>{{ group.author }}</i></b>
+                        </span>
                     </div>
-                    <span class="user">
-                        <i class="bi bi-person-circle"></i>
-                        <b><i>{{ group.author }}</i></b>
-                    </span>
                 </div>
             </a>
         {% endfor %}

@@ -19,18 +19,15 @@ form{
 }
 
 .search-input{
-    width: 80%;
+    width: 100%;
 }
-
+input[type='submit']{
+    border: none;
+    background-color: #14213D;
+    color: #D9D9D9;
+}
 .search-input:focus{
     outline: none;
-}
-
-.search-button{
-    width: 20%;
-    background-color: #14213D;
-    color: white;
-    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------------------ */
@@ -42,7 +39,7 @@ form{
 
 .element{
     display: flex;
-    flex-direction: column;
+    gap: 30px;
     width: 100%;
     text-align: left;
     text-decoration: none;
@@ -55,13 +52,59 @@ form{
     border: none;
 }
 
+.img{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-info{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+.img img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
 .title{
+    margin-top: 0;
     color: #FCA311;
 }
 
 .element-info{
-    max-width: 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     color: #14213D;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    gap: 5px;
+}
+
+@media screen and (max-width: 686px){
+    .element{
+        flex-direction: column;
+    }
+
+    .img{
+        width: 100%;
+    }
+
+    .img img{
+        width: 100%;
+    }
 }

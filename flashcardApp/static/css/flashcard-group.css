@@ -7,6 +7,36 @@ h1{
     color: #FCA311;
 }
 
+.info{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.info-img{
+    width: 30%;
+}
+
+.info-text{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.info-img img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .date-user{
     display: flex;
     gap: 10px;
@@ -31,4 +61,14 @@ h1{
 .group-info a:hover{
     background-color: transparent;
     letter-spacing: 3px;
+}
+
+@media screen and (max-width: 676px) {
+    .info{
+        flex-direction: column;
+    }
+
+    .info-img{
+        width: 100%;
+    }
 }

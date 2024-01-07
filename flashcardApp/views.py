@@ -5,15 +5,14 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from flashcardApp.forms import LoginForm, RegistrationForm
-from flashcardApp.models import flashcardGroup, flashcard
+from flashcardApp.models import FlashcardGroup, Flashcard
 
 
-# Create your views here.
-def Index(request):
+def index(request):
     return render(request, 'content/index.html')
 
 
-def User_login(request):
+def user_login(request):
     loginError = False
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -33,7 +32,7 @@ def User_login(request):
     return render(request, 'user/login.html', {'form': form, 'loginError': loginError})
 
 
-def User_registration(request):
+def user_registration(request):
     error = False
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -56,22 +55,23 @@ def User_registration(request):
     return render(request, 'user/registration.html', {'form': form, 'error': error})
 
 
-def Create(request):
+def create(request):
     if request.method == 'POST':
         lesson_name = request.POST['lesson-name']
         polish_words = request.POST.getlist('polish[]')
         english_words = request.POST.getlist('english[]')
+        imagePath = request.POST.get('file-input-name')
 
         username = request.user.username
 
-        new_flashcard_group = flashcardGroup.groupManager.create(
+        new_flashcard_group = FlashcardGroup.groupManager.create(
             title=lesson_name,
             cardQuantity=len(polish_words),
-            author=User.objects.get(username=username)
+            author=User.objects.get(username=username),
         )
 
         for polish, english in zip(polish_words, english_words):
-            flashcard.flashcardManager.create(
+            Flashcard.flashcardManager.create(
                 word=polish,
                 answer=english,
                 group=new_flashcard_group,
@@ -83,26 +83,32 @@ def Create(request):
         return render(request, 'content/create.html', {})
 
 
-def Search(request):
-    allFlashCardGroups = flashcardGroup.groupManager.all()
-    return render(request, 'content/search.html', {'allGroups': allFlashCardGroups})
+def search(request):
+    if request.method == 'POST' and request.POST.get('my-groups') == 'True':
+        allFlashCardGroups = FlashcardGroup.groupManager.filter(author=request.user.id)
+        isMyGroupsTrue = True
+    else:
+        allFlashCardGroups = FlashcardGroup.groupManager.all()
+        isMyGroupsTrue = False
+
+    return render(request, 'content/search.html', {'allGroups': allFlashCardGroups, 'groups_views': isMyGroupsTrue})
 
 
-def FlashcardGroupView(request, title_pk):
-    group = get_object_or_404(flashcardGroup, title=title_pk)
-    flashcards = flashcard.flashcardManager.filter(group=group)
+def flashcard_group_view(request, title_pk):
+    group = get_object_or_404(FlashcardGroup, title=title_pk)
+    flashcards = Flashcard.flashcardManager.filter(group=group)
     return render(request, 'content/flashcard-group.html', {'group': group, 'flashcards': flashcards})
 
 
-def Flashcard(request, groupId):
-    group = get_object_or_404(flashcardGroup, title=groupId)
-    flashcards = flashcard.flashcardManager.filter(group=group)
+def flashcard(request, groupId):
+    group = get_object_or_404(FlashcardGroup, title=groupId)
+    flashcards = Flashcard.flashcardManager.filter(group=group)
     return render(request, 'content/flashcard.html', {'flashcards': flashcards, 'group': group})
 
 
 class getFlashcardsView(View):
     def get(self, request, groupId):
-        group = get_object_or_404(flashcardGroup, title=groupId)
-        flashcardsJson = flashcard.flashcardManager.filter(group=group).values()
+        group = get_object_or_404(FlashcardGroup, title=groupId)
+        flashcardsJson = Flashcard.flashcardManager.filter(group=group).values()
 
         return JsonResponse({'flashcardsJson': list(flashcardsJson)})

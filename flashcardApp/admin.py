@@ -1,13 +1,19 @@
 from django.contrib import admin
-from flashcardApp.models import flashcardGroup, flashcard
+from flashcardApp.models import FlashcardGroup, Flashcard
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
 
 
-# Register your models here.
-@admin.register(flashcardGroup)
+@admin.register(CustomUser)
+class customUserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'profile_picture']
+
+
+@admin.register(FlashcardGroup)
 class flashcardGroupAdmin(admin.ModelAdmin):
     list_display = ['title', 'cardQuantity', 'date', 'author']
 
 
-@admin.register(flashcard)
+@admin.register(Flashcard)
 class flashcardGroupAdmin(admin.ModelAdmin):
     list_display = ['word', 'answer', 'group', 'language']

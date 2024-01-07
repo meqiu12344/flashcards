@@ -11,6 +11,9 @@
         </div>
         <form action="" class="form" method="post">
             <h1>Zaloguj się</h1>
+            {% if loginError %}
+                <h3>Nieprawidłowe dane logowania</h3>
+            {% endif %}
             {% csrf_token %}
             {{ form.as_p }}
             <br>

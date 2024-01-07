@@ -5,10 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let titles = document.querySelectorAll('.title');
 
         titles.forEach((e) => {
+
+            let parent_node = e.parentNode
+            let mather = parent_node.parentNode
+
             if (searchBox.value === '') {
-                e.parentNode.style.display = 'flex';
+                mather.style.display = 'flex';
             } else {
-                e.parentNode.style.display = e.innerHTML.toLowerCase().includes(searchBox.value.toLowerCase()) ? '' : 'none';
+                mather.style.display = e.innerHTML.toLowerCase().includes(searchBox.value.toLowerCase()) ? '' : 'none';
             }
         });
     });
